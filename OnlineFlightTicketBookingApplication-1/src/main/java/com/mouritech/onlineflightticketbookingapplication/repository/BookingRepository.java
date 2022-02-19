@@ -15,10 +15,10 @@ public interface BookingRepository extends JpaRepository<Booking, Long>{
 
         Optional<Booking> findByBookingId(String bookingId);
 		List<Booking> findByBookingDate(String bookingId);
-		Optional<Booking> findByBookingDateAndUser(Long userId,Date bookingDate);
+		Optional<Booking> findByFightBookedAndUser(Long userId,String fightBooked);
 		List<Booking> findByUser(Long userId);
 		
-	
+		
 		
 		
 }

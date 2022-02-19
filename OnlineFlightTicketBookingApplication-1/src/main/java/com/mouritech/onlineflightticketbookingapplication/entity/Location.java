@@ -1,13 +1,12 @@
 package com.mouritech.onlineflightticketbookingapplication.entity;
 
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -15,41 +14,33 @@ import javax.persistence.Table;
 public class Location {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "location_id")
+	@Column(name = "location_id" ,length = 64)
     private Long locationId;
    
-	@Column(name = "location_name")
-	private String locationName;
-	
-	@Column(name = "country")
-	private String country;
-	
-	@Column(name = "airport")
-    private String airport;
-	
-	@Column(name = "code")
-    private String code;
-	
+	@Column(name = "location_from" ,nullable = false)
+	private String locationFrom;
+	@Column(name = "location_to" ,nullable = false)
+	private String locationTo;
+	@Column(name = "location_onworddate" ,nullable = false)
+	private Date onWordDate;
 	
 	public Location() {
 		
 	}
 
-	public Location(Long locationId, String locationName, String country, String airport, String code) {
-		super();
-		this.locationId = locationId;
-		this.locationName = locationName;
-		this.country = country;
-		this.airport = airport;
-		this.code = code;
-	}
+//	public Location(Long locationId, String locationFrom, String locationTo, Date onWordDate) {
+//		super();
+//		this.locationId = locationId;
+//		this.locationFrom = locationFrom;
+//		this.locationTo = locationTo;
+//		this.onWordDate = onWordDate;
+//	}
 
-	public Location(String locationName, String country, String airport, String code) {
+	public Location(String locationFrom, String locationTo, Date onWordDate) {
 		super();
-		this.locationName = locationName;
-		this.country = country;
-		this.airport = airport;
-		this.code = code;
+		this.locationFrom = locationFrom;
+		this.locationTo = locationTo;
+		this.onWordDate = onWordDate;
 	}
 
 	public Long getLocationId() {
@@ -60,42 +51,35 @@ public class Location {
 		this.locationId = locationId;
 	}
 
-	public String getLocationName() {
-		return locationName;
+	public String getLocationFrom() {
+		return locationFrom;
 	}
 
-	public void setLocationName(String locationName) {
-		this.locationName = locationName;
+	public void setLocationFrom(String locationFrom) {
+		this.locationFrom = locationFrom;
 	}
 
-	public String getCountry() {
-		return country;
+	public String getLocationTo() {
+		return locationTo;
 	}
 
-	public void setCountry(String country) {
-		this.country = country;
+	public void setLocationTo(String locationTo) {
+		this.locationTo = locationTo;
 	}
 
-	public String getAirport() {
-		return airport;
+	public Date getOnWordDate() {
+		return onWordDate;
 	}
 
-	public void setAirport(String airport) {
-		this.airport = airport;
-	}
-
-	public String getCode() {
-		return code;
-	}
-
-	public void setCode(String code) {
-		this.code = code;
+	public void setOnWordDate(Date onWordDate) {
+		this.onWordDate = onWordDate;
 	}
 
 	@Override
 	public String toString() {
-		return "Location [locationId=" + locationId + ", locationName=" + locationName + ", country=" + country
-				+ ", airport=" + airport + ", code=" + code + "]";
+		return "Location [locationId=" + locationId + ", locationFrom=" + locationFrom + ", locationTo=" + locationTo
+				+ ", onWordDate=" + onWordDate + "]";
 	}
 	
+
 }

@@ -12,16 +12,18 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.mouritech.onlineflightticketbookingapplication.entity.Booking;
-import com.mouritech.onlineflightticketbookingapplication.exception.BookingDateAlreadyExistsException;
 import com.mouritech.onlineflightticketbookingapplication.exception.BookingNotFoundException;
+import com.mouritech.onlineflightticketbookingapplication.exception.FightBookedAlreadyExistsException;
 import com.mouritech.onlineflightticketbookingapplication.exception.UserNotFoundException;
 import com.mouritech.onlineflightticketbookingapplication.repository.BookingRepository;
 
 
 @Service
 public class BookingServiceImpl implements BookingService{
+	
 	@Autowired
 	private BookingRepository  bookingRepository;
+	
 	@Autowired
 	private UserRepository userRepository;
 
@@ -82,11 +84,7 @@ public class BookingServiceImpl implements BookingService{
 		return new ResponseEntity<Booking>(newBooking,HttpStatus.CREATED);
 	}
 
-	@Override
-	public Booking getBookingDateByUser(Long userId, Date bookingDate) throws BookingDateAlreadyExistsException {
-		return 
-				bookingRepository.findByBookingDateAndUser(userId, bookingDate).
-				orElseThrow(() -> new BookingDateAlreadyExistsException("Booking already exists with the name = " + bookingDate));
-	}
+
+
 	
 }

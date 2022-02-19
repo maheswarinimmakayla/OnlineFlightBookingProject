@@ -4,21 +4,28 @@ import java.util.List;
 import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.mouritech.onlineflightticketbookingapplication.entity.Booking;
 import com.mouritech.onlineflightticketbookingapplication.entity.Flight;
 import com.mouritech.onlineflightticketbookingapplication.exception.BookingNotFoundException;
 import com.mouritech.onlineflightticketbookingapplication.exception.FlightNotFoundException;
+import com.mouritech.onlineflightticketbookingapplication.exception.LocationNotFoundException;
+import com.mouritech.onlineflightticketbookingapplication.exception.UserNotFoundException;
 import com.mouritech.onlineflightticketbookingapplication.repository.FlightRepository;
 import com.mouritech.onlineflightticketbookingapplication.repository.LocationRepository;
 
 @Service
 public class FlightServiceImpl  implements FlightService{
+	
 	@Autowired
 	private FlightRepository  flightRepository;
+	
 	@Autowired
 	private LocationRepository locationRepository;
+	
 	@Override
 	public Flight insertFlight(Flight newFlight) {
 		newFlight.setFlightId(generateFlightId());
@@ -54,7 +61,28 @@ public class FlightServiceImpl  implements FlightService{
 		flightRepository.delete(existingFlight);
 		
 	}
-
+	@Override
+	public ResponseEntity<List<Flight>> getAllFlightsByUserId(Long locationId) throws LocationNotFoundException {
+		if(!locationRepository.existsById(locationId)) {
+			throw new LocationNotFoundException("location not found with id = "  + locationId);
+		}
+		List<Flight> flight = flightRepository.findByLocation(locationId);
+		return new ResponseEntity<List<Flight>>(flight,HttpStatus.OK);
+	}
+	@Override
+	public ResponseEntity<Flight> createFlight(Long locationId, Flight newFlight) throws LocationNotFoundException {
+		Flight flight = locationRepository.findById(locationId).map(
+				location ->{
+					newFlight.setLocation(location);
+					newFlight.setFlightId(generateFlightId());
+		
+				
+					return flightRepository.save(newFlight);
+					
+				}).orElseThrow(()-> new LocationNotFoundException("location not found with id = "  + locationId));
+		return new ResponseEntity<Flight>(newFlight,HttpStatus.CREATED);
+	}
+	
 	
 
 }

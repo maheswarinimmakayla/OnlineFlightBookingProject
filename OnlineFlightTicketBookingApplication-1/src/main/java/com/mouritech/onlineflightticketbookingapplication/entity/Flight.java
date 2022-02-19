@@ -1,13 +1,17 @@
 package com.mouritech.onlineflightticketbookingapplication.entity;
-import javax.persistence.CascadeType;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
+import javax.persistence.ManyToOne;
+
 import javax.persistence.Table;
 
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 @Entity
 @Table(name = "flight_info")
@@ -36,11 +40,38 @@ public class Flight {
 	@Column(name = "total_Seats")
 	private Long totalSeats;
 	
-	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "location_id")
+	public Flight(String fleet, String departureLoc, Long remaingSeats, String fare, String arrivalLoc,
+			Long totalSeats) {
+		super();
+		this.fleet = fleet;
+		this.departureLoc = departureLoc;
+		this.remaingSeats = remaingSeats;
+		this.fare = fare;
+		this.arrivalLoc = arrivalLoc;
+		this.totalSeats = totalSeats;
+	}
+
+	public Flight() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+	@ManyToOne(fetch = FetchType.LAZY,optional = false)
+	@JoinColumn(name="location_id",nullable = false)
+	@OnDelete(action = OnDeleteAction.CASCADE)
+	
 	private Location location;
 
-	public String getFlightId() {
+	public Location getLocation() {
+		return location;
+	}
+
+	public void setLocation(Location location) {
+		this.location = location;
+	}
+
+	
+	
+   public String getFlightId() {
 		return flightId;
 	}
 
@@ -96,21 +127,7 @@ public class Flight {
 		this.totalSeats = totalSeats;
 	}
 
-	public Flight(String fleet, String departureLoc, Long remaingSeats, String fare, String arrivalLoc,
-			Long totalSeats) {
-		super();
-		this.fleet = fleet;
-		this.departureLoc = departureLoc;
-		this.remaingSeats = remaingSeats;
-		this.fare = fare;
-		this.arrivalLoc = arrivalLoc;
-		this.totalSeats = totalSeats;
-	}
-
-	public Flight() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
+	
 
 	@Override
 	public String toString() {
@@ -120,13 +137,6 @@ public class Flight {
 	}
 
 	
-	public Location getLocation() {
-		return location;
-	}
-
-	public void setLocation(Location location) {
-		this.location = location;
-	}
 	
 	
 	

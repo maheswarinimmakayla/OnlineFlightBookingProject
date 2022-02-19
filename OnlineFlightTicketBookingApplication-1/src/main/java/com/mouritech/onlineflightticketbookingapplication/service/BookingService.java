@@ -6,8 +6,10 @@ import java.util.List;
 import org.springframework.http.ResponseEntity;
 
 import com.mouritech.onlineflightticketbookingapplication.entity.Booking;
-import com.mouritech.onlineflightticketbookingapplication.exception.BookingDateAlreadyExistsException;
+
 import com.mouritech.onlineflightticketbookingapplication.exception.BookingNotFoundException;
+import com.mouritech.onlineflightticketbookingapplication.exception.FightBookedAlreadyExistsException;
+import com.mouritech.onlineflightticketbookingapplication.exception.PassengerNotFoundException;
 import com.mouritech.onlineflightticketbookingapplication.exception.UserNotFoundException;
 
 
@@ -26,12 +28,13 @@ public interface BookingService {
 
 	 
 	ResponseEntity<List<Booking>> getAllBookingsByUserId(Long userId) throws UserNotFoundException;
+	
 	ResponseEntity<Booking> createBooking(Long userId, Booking newBooking) throws UserNotFoundException;
 
 
 
 	
 
-	Booking getBookingDateByUser(Long userId, Date bookingDate) throws BookingDateAlreadyExistsException;
+//	Booking getFightBookedByUser(Long userId, String fightBooked) throws FightBookedAlreadyExistsException;
 
 }

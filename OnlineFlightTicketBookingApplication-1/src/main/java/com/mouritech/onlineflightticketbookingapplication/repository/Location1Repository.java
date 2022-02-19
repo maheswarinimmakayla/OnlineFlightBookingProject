@@ -6,10 +6,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import com.mouritech.onlineflightticketbookingapplication.entity.Location;
-import com.mouritech.onlineflightticketbookingapplication.entity.User;
+import com.mouritech.onlineflightticketbookingapplication.entity.Location1;
 @Repository
-public interface LocationRepository  extends JpaRepository<Location, Long>{
-
-	List<Location> findByLocationId(Long locationId);
-	
+public interface Location1Repository extends JpaRepository<Location1, Long> {
+	List<Location1> findByLocation1Id(Long location1Id);
 }

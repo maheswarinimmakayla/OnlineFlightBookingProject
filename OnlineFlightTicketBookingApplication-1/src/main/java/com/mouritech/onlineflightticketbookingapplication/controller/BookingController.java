@@ -17,8 +17,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.mouritech.onlineflightticketbookingapplication.entity.Booking;
-import com.mouritech.onlineflightticketbookingapplication.exception.BookingDateAlreadyExistsException;
+
 import com.mouritech.onlineflightticketbookingapplication.exception.BookingNotFoundException;
+import com.mouritech.onlineflightticketbookingapplication.exception.FightBookedAlreadyExistsException;
 import com.mouritech.onlineflightticketbookingapplication.exception.UserNotFoundException;
 import com.mouritech.onlineflightticketbookingapplication.repository.BookingRepository;
 import com.mouritech.onlineflightticketbookingapplication.repository.UserRepository;
@@ -62,7 +63,7 @@ public class BookingController {
 		
 	}
 	@GetMapping("/booking/{userid}")
-	public ResponseEntity<List<Booking>> getAllProductsBySellerId(@PathVariable("userid") Long userId) throws UserNotFoundException {
+	public ResponseEntity<List<Booking>> getAllBookingsByUserId(@PathVariable("userid") Long userId) throws UserNotFoundException {
 		return bookingService. getAllBookingsByUserId(userId);
 	}
 	
@@ -73,10 +74,10 @@ public class BookingController {
 		
 	}
 	
-	@GetMapping("/booking/{userid}/{bookingDate}")
-	public Booking getBookingDateByUser(@PathVariable("userId") Long userId,
-			@PathVariable("bookingDate") Date bookingDate) throws UserNotFoundException, BookingDateAlreadyExistsException {
-		return bookingService.getBookingDateByUser(userId,bookingDate);
-	}
+//	@GetMapping("/booking/{userid}/{fightBooked}")
+//	public Booking getFightBookedByUser(@PathVariable("userId") Long userId,
+//			@PathVariable("fightBooked") String fightBooked) throws UserNotFoundException,FightBookedAlreadyExistsException {
+//		return bookingService.getFightBookedByUser(userId,fightBooked);
+//	}
 	
 }
