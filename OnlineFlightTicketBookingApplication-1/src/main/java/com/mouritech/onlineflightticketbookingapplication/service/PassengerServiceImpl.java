@@ -37,42 +37,28 @@ public class PassengerServiceImpl implements PassengerService {
 		return passengerRepository.save(newPassenger);
 	}
 
+	@Override
+	public Passenger getPassengerById(Long passengerId) throws PassengerNotFoundException {
+		return passengerRepository.findById(passengerId).orElseThrow(() -> new PassengerNotFoundException("passenger not found with id " + passengerId));
+	}
+
+	@Override
+	public Passenger updatePassengerById(Long passengerId, Passenger passenger) throws PassengerNotFoundException {
+		Passenger existingPassenger = passengerRepository.findById(passengerId).orElseThrow(() -> new PassengerNotFoundException("passenger not found with id " + passengerId));
+		existingPassenger.setFirstName(passenger.getFirstName());
+		existingPassenger.setPassportNo(passenger.getPassportNo());
+		
+		passengerRepository.save(existingPassenger);
+		return existingPassenger;
+	}
+
+	@Override
+	public void deletePassengerById(Long passengerId) throws PassengerNotFoundException {
+		Passenger existingPassenger = passengerRepository.findById(passengerId).orElseThrow(() -> new PassengerNotFoundException("passenger not found with id " + passengerId));
+		passengerRepository.delete(existingPassenger);
+		
+	}
+
 
 	
-//	@Override
-//	public Passenger insertPassenger(Passenger newPassenger) {
-//		newPassenger.setPassengerId(generatePassengerId());
-//		return passengerRepository.save(newPassenger);
-//	}
-//	public String generatePassengerId() {
-//		Random rand = new Random(); //instance of random class
-//	      int upperbound = 255;
-//	        //generate random values from 0-254
-//	      Long pId = (long) rand.nextInt(upperbound);
-//		return "P00" + pId; 
-//	
-//	}
-//	@Override
-//	public Passenger showPassengerById(String passengerId) throws PassengerNotFoundException {
-//		return passengerRepository.findByPassengerId(passengerId).orElseThrow(() -> new PassengerNotFoundException("passenger not found with id " + passengerId));
-//		
-	}
-//	@Override
-//	public List<Passenger> showAllPassengers() {
-//		return passengerRepository.findAll();
-//	}
-//	@Override
-//	public Passenger updatePassengerById(String passengerId, Passenger passenger) throws PassengerNotFoundException {
-//		Passenger existingPassenger = passengerRepository.findByPassengerId(passengerId).orElseThrow(() -> new PassengerNotFoundException("passenger not found with id " + passengerId));
-//		existingPassenger.setFirstName(passenger.getFirstName());
-//		existingPassenger.setPassportNo(passenger.getPassportNo());
-//		passengerRepository.save(existingPassenger);
-//		return existingPassenger;
-//	}
-//	@Override
-//	public void deletePassengerById(String passengerId) throws PassengerNotFoundException {
-//		Passenger existingPassenger = passengerRepository.findByPassengerId(passengerId).orElseThrow(() -> new PassengerNotFoundException("passenger not found with id " + passengerId));
-//		passengerRepository.delete(existingPassenger);
-//		
-//	}
-
+}

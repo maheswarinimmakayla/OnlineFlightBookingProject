@@ -7,4 +7,7 @@ public class LocationNotFoundException extends Exception{
 		super(message);
 	}
 
+//	public LocationNotFoundException(Long locationId) {
+//		super();
+//	}
 }

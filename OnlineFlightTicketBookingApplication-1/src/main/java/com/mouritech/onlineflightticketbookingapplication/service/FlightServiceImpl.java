@@ -64,7 +64,7 @@ public class FlightServiceImpl  implements FlightService{
 	@Override
 	public ResponseEntity<List<Flight>> getAllFlightsByUserId(Long locationId) throws LocationNotFoundException {
 		if(!locationRepository.existsById(locationId)) {
-			throw new LocationNotFoundException("location not found with id = "  + locationId);
+			throw new LocationNotFoundException("location not found with id " + locationId);
 		}
 		List<Flight> flight = flightRepository.findByLocation(locationId);
 		return new ResponseEntity<List<Flight>>(flight,HttpStatus.OK);
@@ -79,7 +79,7 @@ public class FlightServiceImpl  implements FlightService{
 				
 					return flightRepository.save(newFlight);
 					
-				}).orElseThrow(()-> new LocationNotFoundException("location not found with id = "  + locationId));
+				}).orElseThrow(() -> new LocationNotFoundException("location not found with id " + locationId));
 		return new ResponseEntity<Flight>(newFlight,HttpStatus.CREATED);
 	}
 	

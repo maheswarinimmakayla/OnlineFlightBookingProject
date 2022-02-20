@@ -74,10 +74,6 @@ public class BookingController {
 		
 	}
 	
-//	@GetMapping("/booking/{userid}/{fightBooked}")
-//	public Booking getFightBookedByUser(@PathVariable("userId") Long userId,
-//			@PathVariable("fightBooked") String fightBooked) throws UserNotFoundException,FightBookedAlreadyExistsException {
-//		return bookingService.getFightBookedByUser(userId,fightBooked);
-//	}
+
 	
 }

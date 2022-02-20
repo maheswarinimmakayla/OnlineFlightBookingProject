@@ -9,15 +9,12 @@ import com.mouritech.onlineflightticketbookingapplication.entity.User;
 import com.mouritech.onlineflightticketbookingapplication.exception.PassengerNotFoundException;
 
 public interface PassengerService  {
-//   Passenger insertPassenger(Passenger newPassenger);
-//    
-//   Passenger showPassengerById(String passengerId) throws PassengerNotFoundException;
-//
-//	List<Passenger> showAllPassengers();
-//
-//	Passenger updatePassengerById(String passengerId, Passenger passenger) throws PassengerNotFoundException;
-//
-//	void deletePassengerById(String passengerId) throws PassengerNotFoundException;
+
+  
+    Passenger getPassengerById(Long passengerId) throws PassengerNotFoundException;
+
+    Passenger updatePassengerById(Long passengerId, Passenger passenger) throws PassengerNotFoundException;
+    void deletePassengerById(Long passengerId) throws PassengerNotFoundException;
 	ResponseEntity<List<Passenger>> getAllPassenger();
 
 	Passenger insertPassenger(Passenger newPassenger);

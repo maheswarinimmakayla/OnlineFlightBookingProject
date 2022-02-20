@@ -81,10 +81,9 @@ public class BookingServiceImpl implements BookingService{
 					return bookingRepository.save(newBooking);
 					
 				}).orElseThrow(()-> new UserNotFoundException("user not found with id = "  + userId));
-		return new ResponseEntity<Booking>(newBooking,HttpStatus.CREATED);
+	
+	       return new ResponseEntity<Booking>(newBooking,HttpStatus.CREATED);
 	}
 
 
-
-	
 }

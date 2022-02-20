@@ -1,5 +1,6 @@
 package com.mouritech.onlineflightticketbookingapplication.service;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.http.ResponseEntity;
@@ -11,13 +12,16 @@ import com.mouritech.onlineflightticketbookingapplication.exception.LocationNotF
 
 
 public interface LocationService {
-	ResponseEntity<List<Location>> getAllLocation();
 
-	Location insertLocation(Location newLocation);
-	
-	Location updateLocationById(String locationId, Location location) throws LocationNotFoundException;
+	Location insertLocation( Location newLocation);
+    
+	Location getLocationById(Long locationId) throws LocationNotFoundException;
 
-	void deleteLocationById(String locationId) throws LocationNotFoundException;
+	List<Location> getAllLocations();
+
+	Location updateLocationById(Long locationId, Location location) throws LocationNotFoundException;
+
+	void deleteLocationById(Long locationId) throws LocationNotFoundException;
 
 }
 

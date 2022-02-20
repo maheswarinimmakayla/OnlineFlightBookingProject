@@ -42,33 +42,39 @@ public class PassengerController {
 		return passengerService.insertPassenger(newPassenger);
 		
 	}
-//	@PostMapping("passenger")
-//	public Passenger insertPassenger(@RequestBody Passenger newPassenger) {
-//		
-//		return passengerService.insertPassenger(newPassenger);
-//		
+
+	@GetMapping("passenger/{pid}")
+	public Passenger getPassengerById(@PathVariable("pid") Long passengerId) throws PassengerNotFoundException{
+		return passengerService.getPassengerById(passengerId);
+				
+		
+	}
+	@PutMapping("passenger/{pid}")
+	public Passenger updatePassengerById(@PathVariable("pid") Long passengerId,@RequestBody Passenger passenger) throws PassengerNotFoundException{
+		return passengerService.updatePassengerById(passengerId, passenger);
+		
+		
+	}
+
+//	@PutMapping("/passenger/{pid}")
+//	public ResponseEntity<Passenger> updatePassengerById(@PathVariable(value = "pid") Long passengerId,
+//	@Valid @RequestBody Passenger passengerDetails) throws PassengerNotFoundException {
+//	Passenger passenger = passengerRepository.findById(passengerId)
+//	.orElseThrow(() -> new PassengerNotFoundException("Order not found for this id :: " + orderId));
+//    
+//	order.setAmount(orderDetails.getAmount());
+//	order.setCustomerId(orderDetails.getCustomerId());
+//
+//	order.setOrderDate(orderDetails.getOrderDate());
+//
+//	final Order updatedOrder = orderRepository.save(order);
+//	return ResponseEntity.ok(updatedOrder);
 //	}
-//	@GetMapping("passenger")
-//	public List<Passenger> showAllPassengers(){
-//		return passengerService.showAllPassengers();
-//		
-//	}
-//	@GetMapping("passenger/{pid}")
-//	public Passenger showPassengerById(@PathVariable("pid") String passengerId) throws PassengerNotFoundException{
-//		return passengerService.showPassengerById(passengerId);
-//				
-//		
-//	}
-//	@PutMapping("passenger/{pid}")
-//	public Passenger updatePassengerById(@PathVariable("pid") String passengerId,@RequestBody Passenger passenger) throws PassengerNotFoundException{
-//		return passengerService.updatePassengerById(passengerId, passenger);
-//		
-//	}
-//	
-//	@DeleteMapping("passenger/{pid}")
-//	public String deletePassengerById(@PathVariable("pid") String passengerId) throws PassengerNotFoundException{
-//		passengerService.deletePassengerById(passengerId);
-//		 return "deleted the passenger";
-//		
-//	}
+	
+	@DeleteMapping("passenger/{pid}")
+	public String deletePassengerById(@PathVariable("pid") Long passengerId) throws PassengerNotFoundException{
+		passengerService.deletePassengerById(passengerId);
+		 return "deleted the passenger";
+		
+	}
 }

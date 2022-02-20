@@ -17,24 +17,16 @@ public class Location {
 	@Column(name = "location_id" ,length = 64)
     private Long locationId;
    
-	@Column(name = "location_from" ,nullable = false)
+	@Column(name = "location_from")
 	private String locationFrom;
 	@Column(name = "location_to" ,nullable = false)
 	private String locationTo;
-	@Column(name = "location_onworddate" ,nullable = false)
+	@Column(name = "location_onworddate")
 	private Date onWordDate;
 	
 	public Location() {
 		
 	}
-
-//	public Location(Long locationId, String locationFrom, String locationTo, Date onWordDate) {
-//		super();
-//		this.locationId = locationId;
-//		this.locationFrom = locationFrom;
-//		this.locationTo = locationTo;
-//		this.onWordDate = onWordDate;
-//	}
 
 	public Location(String locationFrom, String locationTo, Date onWordDate) {
 		super();
@@ -80,6 +72,7 @@ public class Location {
 		return "Location [locationId=" + locationId + ", locationFrom=" + locationFrom + ", locationTo=" + locationTo
 				+ ", onWordDate=" + onWordDate + "]";
 	}
+
 	
 
 }
